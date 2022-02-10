@@ -268,7 +268,7 @@ func (p *Pruner) Prune() (*Stats, error) {
 func (p *Pruner) prune(path string, info os.FileInfo) bool {
 	// exceptions
 	for _, glob := range p.excepts {
-		matched, _ := filepath.Match(glob, info.Name())
+		matched, _ := filepath.Match(glob, path)
 		if matched {
 			return false
 		}
@@ -276,7 +276,7 @@ func (p *Pruner) prune(path string, info os.FileInfo) bool {
 
 	// globs
 	for _, glob := range p.globs {
-		matched, _ := filepath.Match(glob, info.Name())
+		matched, _ := filepath.Match(glob, path)
 		if matched {
 			return true
 		}
